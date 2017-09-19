@@ -1,0 +1,32 @@
+# ==============================================
+# Policy File of /system/binmemsicd3416x Executable File 
+
+
+# ==============================================
+# Type Declaration
+# ==============================================
+
+type memsicd3416x_exec , exec_type, file_type;
+type memsicd3416x ,domain;
+
+# ==============================================
+# MTK Policy Rule
+# ==============================================
+
+#Vanzo:dingge on: Mon, 20 Apr 2015 12:48:51 +0800
+init_daemon_domain(memsicd3416x)
+#allow memsicd3416x_msensor_device:chr_file{read write ioctl open};
+#allow memsicd3416x_gsensor_device:chr_file{read write open};
+allow memsicd3416x gsensor_device:file{read write};
+
+allow memsicd3416x msensor_device:chr_file { open ioctl read write };
+allow memsicd3416x gsensor_device:chr_file { open ioctl read write };
+allow memsicd3416x input_device:dir { search open read write };
+allow memsicd3416x input_device:file { open read };
+allow memsicd3416x akmd8963_access_file1:file { open read write };
+allow memsicd3416x akmd8963_access_file2:file { open read write};
+# Operate data partation directly, need modify later,e.g. use "data/misc/sensor".
+allow memsicd3416x system_data_file:dir { write add_name create setattr };
+allow memsicd3416x system_data_file:file { open write read create setattr};
+#End of Vanzo: dingge
+
